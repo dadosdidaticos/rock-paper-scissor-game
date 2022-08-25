@@ -1,5 +1,6 @@
 /*fazer com que o computador escolha uma opção aleatória*/
 const choice_arr = ['rock','paper','scissors']
+
 function getComputerChoice() {
     var choice_index = Math.floor(Math.random()*3)
     return choice_arr[choice_index]
@@ -18,15 +19,12 @@ function playRound(playerSelection,computerSelection) {
     }
 }
 
-
-
 /*game itself: its a best of five. First one to get 5 points, wins*/
 function game() {
     /*no início do jogo, temos:*/
     let roundNumber = 1
     let playerScore = 0
     let computerScore = 0
-
     while (true){
         /*receber input do player*/
         var playerSelection = prompt(`Round ${roundNumber}!\nSelect Rock, Paper or Scissors:`)
