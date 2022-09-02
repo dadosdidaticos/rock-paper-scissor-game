@@ -7,55 +7,48 @@ function getComputerChoice() {
 }
 
 function playRound(playerSelection,computerSelection) {
-    playerSelection = playerSelection.toLowerCase()
     winningList = ["rock-scissors","paper-rock","scissors-paper"]
     roundPlay = playerSelection+"-"+computerSelection
+    let roundWinnerMessage
     if (playerSelection==computerSelection){
-        return "draw"
+        roundWinnerMessage =`Player has chosen: ${playerSelection}.\nComputer has chosen: ${computerSelection}.\nThis round is drawn!`
     }else if (winningList.includes(roundPlay)){
-        return "player"
+        roundWinnerMessage = `Player has chosen: ${playerSelection}.\nComputer has chosen: ${computerSelection}.\nPlayer Wins round!`
+        playerScore += 1
     }else{
-        return "computer"
+        roundWinnerMessage = 
+            `Player has chosen: ${playerSelection}. Computer has chosen: ${computerSelection}. Computer Wins round!`
+        computerScore += 1
     }
+    roundNumber += 1
+    result.textContent = roundWinnerMessage
+    score.textContent = `The Score of the Game is: player: ${playerScore}, computer: ${computerScore}`
+    if (playerScore == 3){
+        alert("Player Wins!")
+        score.textContent = `The Score of the Game is: player: ${playerScore}, computer: ${computerScore}. Player Wins.`
+        playerScore = 0
+        computerScore = 0
+    }else if (computerScore == 3){
+        alert("Computer Wins!")
+        score.textContent = `The Score of the Game is: player: ${playerScore}, computer: ${computerScore}. Computer Wins.`
+        playerScore = 0
+        computerScore = 0
+    }
+    return true
 }
 
-/*game itself: its a best of five. First one to get 5 points, wins*/
-function game() {
-    /*no início do jogo, temos:*/
-    let roundNumber = 1
-    let playerScore = 0
-    let computerScore = 0
-    while (true){
-        /*receber input do player*/
-        var playerSelection = prompt(`Round ${roundNumber}!\nSelect Rock, Paper or Scissors:`)
-        playerSelection = playerSelection.toLowerCase()
-        while (choice_arr.includes(playerSelection)==false){
-            playerSelection = prompt("player has chosen: "+playerSelection+".\nThis is not a valid entry. Please try again:")
-            playerSelection = playerSelection.toLowerCase()
-        }
-        /*receber input do computador*/
-        var computerSelection = getComputerChoice()
-        /*obter vencedor e alertar msg*/
-        if (playRound(playerSelection,computerSelection)==="draw") {
-            alert(`player has chosen: ${playerSelection}.\ncomputer has chosen: ${computerSelection}.\nThis round is drawn!`+
-            `\nThe Score of the Game is: player: ${playerScore}, computer: ${computerScore}`)
-            roundNumber+=1
-        }else if (playRound(playerSelection,computerSelection)==="player") {
-            playerScore+=1
-            alert(`player has chosen: ${playerSelection}.\ncomputer has chosen: ${computerSelection}.\nplayer Wins round ${roundNumber}!`+
-            `\nThe Score of the Game is: player: ${playerScore}, computer: ${computerScore}`)
-            roundNumber+=1
-        }else if (playRound(playerSelection,computerSelection)==="computer") {
-            computerScore+=1
-            alert(`player has chosen: ${playerSelection}.\ncomputer has chosen: ${computerSelection}.\nComputer Wins round ${roundNumber}!`+
-            `\nThe Score of the Game is: player: ${playerScore}, computer: ${computerScore}`)
-            roundNumber+=1
-        }
-        /*Checagem de término de jogo*/
-        if (playerScore == 3){
-            return alert("Player Wins!")
-        }else if (computerScore == 3){
-            return alert("Computer Wins!")
-        }
+
+
+const buttons = document.querySelectorAll('button')
+const result = document.querySelector('#winner')
+const score = document.querySelector('#score')
+let playerSelection = buttons.forEach((button) => {
+        button.addEventListener('click',() => {
+            playRound(button.id,getComputerChoice());
+        })
     }
-}
+)
+
+let roundNumber = 1
+let playerScore = 0
+let computerScore = 0
