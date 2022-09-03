@@ -1,5 +1,40 @@
-.content {
+.button-set {
     display: flex;
     justify-content: center;
     gap: 48px;
 }
+
+* {
+    font-family: "Press Start 2P";
+}
+
+#displayImage{
+    width: 500px;
+    height: auto;
+}
+
+#game-display{
+    display: flex;
+    justify-content: center;
+    margin: 30px;
+}
+
+button{
+    
+}
+
+    button.bulbasaur {
+        background-color: greenyellow;
+        color: green;
+    }
+
+    button.charmander {
+        background-color:pink;
+        color: red;
+    }
+
+    button.squirtle {
+        background-color:aqua;
+        color: blue;
+    }
+

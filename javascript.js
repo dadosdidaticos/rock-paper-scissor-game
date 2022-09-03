@@ -1,14 +1,22 @@
 /*fazer com que o computador escolha uma opção aleatória*/
-const choice_arr = ['rock','paper','scissors']
-
+const choice_arr = ['bulbasaur','charmander','squirtle']
+const opponentChoiceArr = ['opponent-1','opponent-2','opponent-3']
 function getComputerChoice() {
     var choice_index = Math.floor(Math.random()*3)
     return choice_arr[choice_index]
 }
 
+function getOpponent() {
+    var choice_index = Math.floor(Math.random()*3)
+    return opponentChoiceArr[choice_index]
+}
+
 function playRound(playerSelection,computerSelection) {
-    winningList = ["rock-scissors","paper-rock","scissors-paper"]
+    winningList = ["bulbasaur-squirtle","charmander-bulbasaur","squirtle-charmander"]
     roundPlay = playerSelection+"-"+computerSelection
+    currentDisplayImage.setAttribute('src',`./GUI/battle/pokemon/initial-empty-empty.png`)
+    currentDisplayImage.setAttribute('src',`./GUI/battle/pokemon/initial-${playerSelection}-empty.png`)
+    currentDisplayImage.setAttribute('src',`./GUI/battle/pokemon/initial-${playerSelection}-${computerSelection}.png`)
     let roundWinnerMessage
     if (playerSelection==computerSelection){
         roundWinnerMessage =`Player has chosen: ${playerSelection}.\nComputer has chosen: ${computerSelection}.\nThis round is drawn!`
@@ -38,6 +46,12 @@ function playRound(playerSelection,computerSelection) {
 }
 
 
+
+const gameDisplay = document.querySelector('#game-display')
+let currentDisplayImage = document.createElement('img')
+currentDisplayImage.setAttribute('src',`./GUI/battle/${getOpponent()}/begin.png`)
+currentDisplayImage.setAttribute('id',`displayImage`)
+gameDisplay.appendChild(currentDisplayImage)
 
 const buttons = document.querySelectorAll('button')
 const result = document.querySelector('#winner')
