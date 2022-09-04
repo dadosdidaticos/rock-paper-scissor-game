@@ -4,13 +4,53 @@
     gap: 48px;
 }
 
+
+body{
+    background-image:url("UI-elements/diag_lines_light.png");
+    background-repeat:repeat;
+} 
+
+
+
 * {
     font-family: "Press Start 2P";
 }
 
 #displayImage{
     width: 500px;
+    border-width: 3px;
+    border-radius: 5px;
+    border-style: solid;
     height: auto;
+    visibility: hidden;
+    border-color: blue;
+}
+
+.results {
+    display: flex;
+    justify-content: center;
+    color: blue;
+}
+
+.header{
+    display: flex;
+    justify-content: center;
+    margin: 25px;
+}
+div.start{
+    display: flex;
+    justify-content: center;
+}
+#start{
+    height: 60px;
+    width: 300px;
+    background-color: rgb(223, 208, 0);
+    border-radius: 3px;
+    border-style: solid;
+    border-color: blue;
+    color: blue;
+    border-width: 4px;
+    font-size: 36px;
 }
 
 #game-display{
@@ -19,21 +59,23 @@
     margin: 30px;
 }
 
-button{
-    
+button.selector{
+    visibility: hidden;
+    height: 30px;
+    width: 150px;
 }
 
-    button.bulbasaur {
+    #bulbasaur {
         background-color: greenyellow;
         color: green;
     }
 
-    button.charmander {
+    #charmander {
         background-color:pink;
         color: red;
     }
 
-    button.squirtle {
+    #squirtle {
         background-color:aqua;
         color: blue;
     }

@@ -7,19 +7,25 @@
     <link href='https://fonts.googleapis.com/css?family=Press Start 2P' rel='stylesheet'>
   </head>
 <body>
-  <div class="content">
-    <div id="game-display"></div>
-    <div class="button-set">
-      <button id ="bulbasaur" class="bulbasaur">Bulbasaur</button>
-      <button id ="charmander" class="charmander">Charmander</button>
-      <button id ="squirtle" class="squirtle">Squirtle</button>
-    </div>
+  <div class="header">
+    <img src="./UI-elements/jokenpokemon-logo.png" alt="jokenpokemon logo">
+  </div>
+  <div class="start">
+    <button id="start">START</button>
   </div>
   <div class="results">
     <p id="winner"></p>
     <p id="score"></p>
   </div>
-  
+  <div class="content">
+    <div id="game-display"></div>
+    <div class="button-set">
+      <button id ="bulbasaur" class="selector">Bulbasaur</button>
+      <button id ="charmander" class="selector">Charmander</button>
+      <button id ="squirtle" class="selector">Squirtle</button>
+    </div>
+  </div>
+  <audio id="pokemon-battle" loop src="./audio/pokemon-battle.mp3"></audio>
   <script src="javascript.js"></script>
 </body>
 </html>

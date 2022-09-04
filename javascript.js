@@ -15,47 +15,62 @@ function playRound(playerSelection,computerSelection) {
     winningList = ["bulbasaur-squirtle","charmander-bulbasaur","squirtle-charmander"]
     roundPlay = playerSelection+"-"+computerSelection
     currentDisplayImage.setAttribute('src',`./GUI/battle/pokemon/initial-empty-empty.png`)
-    currentDisplayImage.setAttribute('src',`./GUI/battle/pokemon/initial-${playerSelection}-empty.png`)
-    currentDisplayImage.setAttribute('src',`./GUI/battle/pokemon/initial-${playerSelection}-${computerSelection}.png`)
+    setTimeout(()=>{currentDisplayImage.setAttribute('src',`./GUI/battle/pokemon/initial-${playerSelection}-empty.png`)},1000);
+    setTimeout(()=>{currentDisplayImage.setAttribute('src',`./GUI/battle/pokemon/initial-${playerSelection}-${computerSelection}.png`)},2000);
     let roundWinnerMessage
-    if (playerSelection==computerSelection){
-        roundWinnerMessage =`Player has chosen: ${playerSelection}.\nComputer has chosen: ${computerSelection}.\nThis round is drawn!`
-    }else if (winningList.includes(roundPlay)){
-        roundWinnerMessage = `Player has chosen: ${playerSelection}.\nComputer has chosen: ${computerSelection}.\nPlayer Wins round!`
-        playerScore += 1
-    }else{
-        roundWinnerMessage = 
-            `Player has chosen: ${playerSelection}. Computer has chosen: ${computerSelection}. Computer Wins round!`
-        computerScore += 1
-    }
-    roundNumber += 1
-    result.textContent = roundWinnerMessage
-    score.textContent = `The Score of the Game is: player: ${playerScore}, computer: ${computerScore}`
-    if (playerScore == 3){
-        alert("Player Wins!")
-        score.textContent = `The Score of the Game is: player: ${playerScore}, computer: ${computerScore}. Player Wins.`
-        playerScore = 0
-        computerScore = 0
-    }else if (computerScore == 3){
-        alert("Computer Wins!")
-        score.textContent = `The Score of the Game is: player: ${playerScore}, computer: ${computerScore}. Computer Wins.`
-        playerScore = 0
-        computerScore = 0
-    }
-    return true
+    setTimeout(()=>{
+        currentDisplayImage.setAttribute('src',`./GUI/battle/pokemon/battle-${playerSelection}-${computerSelection}.png`)
+        if (winningList.includes(roundPlay)){
+            playerScore += 1
+        }else if (playerSelection==computerSelection){
+           
+        }else{
+            computerScore += 1
+        }
+        roundNumber += 1
+        result.textContent = roundWinnerMessage
+        score.textContent = `Player: ${playerScore}, Computer: ${computerScore}`
+        if (playerScore == 3){
+            score.textContent = `The Score of the Game is: player: ${playerScore}, computer: ${computerScore}. Player Wins.`
+            currentDisplayImage.setAttribute('src',`./GUI/battle/${getOpponent()}/lose.png`)
+            //restart game:
+            setTimeout(() => {currentDisplayImage.setAttribute('src',`./GUI/battle/${getOpponent()}/begin.png`)}, 4000); 
+            playerScore = 0
+            computerScore = 0
+            roundNumber = 0
+        }else if (computerScore == 3){
+            score.textContent = `The Score of the Game is: player: ${playerScore}, computer: ${computerScore}. Computer Wins.`
+            currentDisplayImage.setAttribute('src',`./GUI/battle/${getOpponent()}/win.png`)
+            //restart game:
+            setTimeout(() => {currentDisplayImage.setAttribute('src',`./GUI/battle/${getOpponent()}/begin.png`)}, 4000);
+            playerScore = 0
+            computerScore = 0
+            roundNumber = 0
+        }
+        return true
+    },4000)
 }
-
-
-
+const pokemonMusic = document.querySelector('audio')
 const gameDisplay = document.querySelector('#game-display')
 let currentDisplayImage = document.createElement('img')
 currentDisplayImage.setAttribute('src',`./GUI/battle/${getOpponent()}/begin.png`)
 currentDisplayImage.setAttribute('id',`displayImage`)
 gameDisplay.appendChild(currentDisplayImage)
-
-const buttons = document.querySelectorAll('button')
+const startButton = document.querySelector('#start')
+const buttons = document.querySelectorAll('button.selector')
 const result = document.querySelector('#winner')
 const score = document.querySelector('#score')
+
+const divStart = document.querySelector('div.start')
+startButton.addEventListener('click',() => {
+    
+    divStart.removeChild(startButton)
+    currentDisplayImage.style.visibility = 'visible'
+    pokemonMusic.play()
+    buttons.forEach((button) => {
+        button.style.visibility = 'visible'
+    });
+})
 let playerSelection = buttons.forEach((button) => {
         button.addEventListener('click',() => {
             playRound(button.id,getComputerChoice());
